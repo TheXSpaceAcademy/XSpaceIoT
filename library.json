@@ -1,0 +1,29 @@
+{
+    "name": "XSpaceIoT",
+    "version": "1.0.1",
+    "description": "Library used for XSpace and another ESP32 based boards",
+    "keywords": "control, esp32, iot, xspace",
+    "repository":
+    {
+      "type": "git",
+      "url": "https://github.com/TheXSpaceAcademy/XSpaceIoT"
+    },
+    "authors":
+    [
+      {
+        "name": "The XSpace Academy",
+        "email": "p.cardenasc@xspace.pe",
+        "url": "http://xspace.pe",
+        "maintainer": true
+      }
+    ],
+    "export": {
+      "exclude":
+      [
+          "test/*"
+      ]
+    },
+    "license": "MIT",
+    "frameworks": ["Arduino"],
+    "platforms": ["espressif32"]
+  }
