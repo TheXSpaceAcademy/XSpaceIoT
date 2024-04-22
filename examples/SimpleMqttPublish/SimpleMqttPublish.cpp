@@ -16,7 +16,7 @@ void setup(){
   Serial.begin(115200);
 
   // Enable serial information output
-  Thing.SerialInfo(true); 
+  Thing.Mqtt_SerialInfo(true); 
 
   // Initialize MQTT connection with server "www.xspace.pe" on port 1883, callback function is not used (NULL)
   Thing.Mqtt_init("www.xspace.pe",1883,NULL);

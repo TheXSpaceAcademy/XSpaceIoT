@@ -89,7 +89,7 @@ class XSThing{
 		/* Toggles serial debugging information
 			@param mode Enable or disable debugging information
 		*/
-		void SerialInfo(bool mode);
+		void Mqtt_SerialInfo(bool mode);
 
 		/* Initializes WiFi connection
 			@param ssid WiFi SSID

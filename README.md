@@ -17,7 +17,7 @@ To use XSpaceIoT with PlatformIO, add the following line to your platformio.ini 
 
 ```ini
 lib_deps =
-  git://github.com/TheXSpaceAcademy/XSpaceIoT.git#main
+  https://github.com/TheXSpaceAcademy/XSpaceIoT.git#main
 ```
 
 ### Arduino IDE

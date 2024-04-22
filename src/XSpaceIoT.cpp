@@ -92,7 +92,7 @@ void XSThing::Mqtt_CheckBuffer(){
 	XSPSClientMQTT.loop();
 }
 
-void XSThing::SerialInfo(bool mode){
+void XSThing::Mqtt_SerialInfo(bool mode){
 	this->_xspace_info = mode;
 }
 
