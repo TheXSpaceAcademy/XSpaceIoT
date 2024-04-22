@@ -6,6 +6,7 @@
 #define XSPACEIOT_h
 
 #include <Arduino.h>
+#include <WiFi.h>
 #include <IPAddress.h>
 #include <Client.h>
 #include <Stream.h>
