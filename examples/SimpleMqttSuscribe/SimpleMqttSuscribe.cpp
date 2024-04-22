@@ -7,7 +7,7 @@ const char* WIFI_PASSWORD = "C9AA28BA93";
 const char* MQTT_ID = "the_xspacer"; // MQTT client identifier (MUST BE UNIQUE to prevent connection issues)
 
 // Object creation
-XSthing Thing;
+XSThing Thing;
 
 // Callback to handle incoming data from subscribed topics
 void Mqtt_Callback(char* topicx, byte* Data, unsigned int DataLen){

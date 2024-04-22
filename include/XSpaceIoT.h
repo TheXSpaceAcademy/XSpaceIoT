@@ -84,7 +84,7 @@
 #define CHECK_STRING_LENGTH(l,s) if (l+2+strnlen(s, this->bufferSize) > this->bufferSize) {_client->stop();return false;}
 
 
-class XSthing{
+class XSThing{
 	public:
 		/* Toggles serial debugging information
 			@param mode Enable or disable debugging information

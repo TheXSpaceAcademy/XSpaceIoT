@@ -9,7 +9,7 @@ const char* MQTT_ID = "the_xspacer"; // MQTT client identifier (MUST BE UNIQUE t
 int counter = 0;
 
 // Object creation
-XSthing Thing;
+XSThing Thing;
 
 void setup(){
   // Initialize serial communication

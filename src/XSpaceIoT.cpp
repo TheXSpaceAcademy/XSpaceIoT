@@ -9,7 +9,7 @@
 WiFiClient XSPSClientWifiClient;
 XSPSClient XSPSClientMQTT(XSPSClientWifiClient);
 
-void XSthing::Wifi_init(const char* ssid, const char* wifi_pass){
+void XSThing::Wifi_init(const char* ssid, const char* wifi_pass){
 	
 	if(this->_xspace_info){
 		Serial.println();
@@ -34,7 +34,7 @@ void XSthing::Wifi_init(const char* ssid, const char* wifi_pass){
 
 }
 
-void XSthing::Mqtt_Connect(const char* ssid, const char* wifi_pass, const char *clientId){
+void XSThing::Mqtt_Connect(const char* ssid, const char* wifi_pass, const char *clientId){
 
     this->Wifi_init(ssid, wifi_pass);
 
@@ -57,24 +57,24 @@ void XSthing::Mqtt_Connect(const char* ssid, const char* wifi_pass, const char *
 
 }
 
-void XSthing::Mqtt_init(const char *mqtt_server, uint16_t mqtt_port, void (*callback)(char*, byte*, unsigned int)) {
+void XSThing::Mqtt_init(const char *mqtt_server, uint16_t mqtt_port, void (*callback)(char*, byte*, unsigned int)) {
     XSPSClientMQTT.setServer(mqtt_server, mqtt_port);
     XSPSClientMQTT.setCallback(callback);
 }
 
-bool XSthing::Mqtt_IsConnected(){
+bool XSThing::Mqtt_IsConnected(){
 	return XSPSClientMQTT.connected();
 }
 
-void XSthing::Mqtt_Publish(const char* topic, const char* payload){
+void XSThing::Mqtt_Publish(const char* topic, const char* payload){
 	XSPSClientMQTT.publish(topic,payload);
 }
 
-void XSthing::Mqtt_Publish(const char* topic, double number_payload){
+void XSThing::Mqtt_Publish(const char* topic, double number_payload){
 	XSPSClientMQTT.publish(topic,std::to_string(number_payload).c_str());
 }
 
-void XSthing::Mqtt_Suscribe(const char* topic){
+void XSThing::Mqtt_Suscribe(const char* topic){
 	if(this->Mqtt_IsConnected()){
 		 XSPSClientMQTT.subscribe(topic);
 		 if(this->_xspace_info){
@@ -88,11 +88,11 @@ void XSthing::Mqtt_Suscribe(const char* topic){
 
 }
 
-void XSthing::Mqtt_CheckBuffer(){
+void XSThing::Mqtt_CheckBuffer(){
 	XSPSClientMQTT.loop();
 }
 
-void XSthing::SerialInfo(bool mode){
+void XSThing::SerialInfo(bool mode){
 	this->_xspace_info = mode;
 }
 
