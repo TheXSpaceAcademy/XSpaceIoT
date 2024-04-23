@@ -105,6 +105,15 @@ class XSThing{
 		*/
 		void Mqtt_init(const char *mqtt_server, uint16_t mqtt_port, void (*callback)(char*, byte*, unsigned int));
 
+
+		/* Initializes MQTT client
+			@param mqtt_server MQTT server address
+			@param mqtt_port MQTT server port
+			@param callback MQTT callback
+			@param CheckBufferInterval Period for checking mqtt buffer (in ms)
+		*/
+		void Mqtt_init(const char *mqtt_server, uint16_t mqtt_port, void (*callback)(char*, byte*, unsigned int), int CheckBufferInterval);
+
 		/* Connects to the MQTT server
 			@param ssid WiFi SSID
 			@param wifi_pass WiFi password

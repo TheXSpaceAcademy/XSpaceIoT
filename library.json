@@ -1,6 +1,6 @@
 {
     "name": "XSpaceIoT",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "description": "Library used for XSpace and another ESP32 based boards",
     "keywords": "control, esp32, iot, xspace, xspacev20, xspacev21, xspacebiov10",
     "repository":

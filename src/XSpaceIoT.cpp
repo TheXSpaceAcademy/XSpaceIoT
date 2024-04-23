@@ -9,6 +9,17 @@
 WiFiClient XSPSClientWifiClient;
 XSPSClient XSPSClientMQTT(XSPSClientWifiClient);
 
+TickType_t CheckBufferTime;
+void MqttLoopCheckBuffer(void *pv){
+
+    while(1){
+        XSPSClientMQTT.loop();
+        vTaskDelay(CheckBufferTime);
+    }
+    vTaskDelete(NULL);
+    
+}
+
 void XSThing::Wifi_init(const char* ssid, const char* wifi_pass){
 	
 	if(this->_xspace_info){
@@ -57,6 +68,12 @@ void XSThing::Mqtt_Connect(const char* ssid, const char* wifi_pass, const char *
 
 }
 
+void XSThing::Mqtt_init(const char *mqtt_server, uint16_t mqtt_port, void (*callback)(char*, byte*, unsigned int), int CheckBufferInterval) {
+    XSPSClientMQTT.setServer(mqtt_server, mqtt_port);
+    XSPSClientMQTT.setCallback(callback);
+    CheckBufferTime = CheckBufferInterval;
+    xTaskCreate(MqttLoopCheckBuffer,"",2500,NULL,2,NULL);
+}
 void XSThing::Mqtt_init(const char *mqtt_server, uint16_t mqtt_port, void (*callback)(char*, byte*, unsigned int)) {
     XSPSClientMQTT.setServer(mqtt_server, mqtt_port);
     XSPSClientMQTT.setCallback(callback);
