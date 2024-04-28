@@ -21,24 +21,23 @@ void MqttLoopCheckBuffer(void *pv){
 }
 
 void XSThing::Wifi_init(const char* ssid, const char* wifi_pass){
-	
 	if(this->_xspace_info){
 		Serial.println();
-		Serial.print("Conectando a ssid: ");
+		Serial.print("Connecting to ssid: ");
 		Serial.println(ssid);
 	}
 
 	WiFi.begin(ssid, wifi_pass);
 
 	while (WiFi.status() != WL_CONNECTED) {
-		delay(500);
+		delay(250);
 		if(this->_xspace_info) Serial.print(".");
 	}
 
 	if(this->_xspace_info){
 		Serial.println("");
-		Serial.println("Conectado!!");
-		Serial.println("Dirección IP: ");
+		Serial.println("Connected!!");
+		Serial.println("IP address assigned: ");
 		Serial.println(WiFi.localIP());
 	}
 	WiFi.setSleep(false);
@@ -51,16 +50,14 @@ void XSThing::Mqtt_Connect(const char* ssid, const char* wifi_pass, const char *
 
 	while (!XSPSClientMQTT.connected()) {
 		
-		
-		// Intentamos conectar
 		if (XSPSClientMQTT.connect(clientId)) {
-				if(this->_xspace_info) Serial.println("Conectado al Broker!");
+				if(this->_xspace_info) Serial.println("Connected to the Broker!");
 				
 		}else {
 			if(this->_xspace_info){
-				Serial.print("falló :( con error -> ");
+				Serial.print("Failed :( with error -> ");
 				Serial.print(XSPSClientMQTT.state());
-				Serial.println(" Intentamos de nuevo en 5 segundos");
+				Serial.println("Trying again in 5 seconds");
 				delay(5000);
 			}
 		}
@@ -86,7 +83,6 @@ bool XSThing::Mqtt_IsConnected(){
 void XSThing::Mqtt_Publish(const char* topic, const char* payload){
 	XSPSClientMQTT.publish(topic,payload);
 }
-
 void XSThing::Mqtt_Publish(const char* topic, double number_payload){
 	XSPSClientMQTT.publish(topic,std::to_string(number_payload).c_str());
 }
@@ -95,10 +91,10 @@ void XSThing::Mqtt_Suscribe(const char* topic){
 	if(this->Mqtt_IsConnected()){
 		 XSPSClientMQTT.subscribe(topic);
 		 if(this->_xspace_info){
-			 Serial.print("Suscrito a: ");
+			 Serial.print("Suscribed to: ");
 			 Serial.println(topic);
 		 }else{
-			 Serial.println("Subscripcion fallida, no se tiene conexion con el broker");
+			 Serial.println("Subscription failed, no connection to the broker");
 		 }
 	}
    
@@ -272,19 +268,15 @@ XSPSClient::~XSPSClient() {
 boolean XSPSClient::connect(const char *id) {
     return connect(id,NULL,NULL,0,0,0,0,1);
 }
-
 boolean XSPSClient::connect(const char *id, const char *user, const char *pass) {
     return connect(id,user,pass,0,0,0,0,1);
 }
-
 boolean XSPSClient::connect(const char *id, const char* willTopic, uint8_t willQos, boolean willRetain, const char* willMessage) {
     return connect(id,NULL,NULL,willTopic,willQos,willRetain,willMessage,1);
 }
-
 boolean XSPSClient::connect(const char *id, const char *user, const char *pass, const char* willTopic, uint8_t willQos, boolean willRetain, const char* willMessage) {
     return connect(id,user,pass,willTopic,willQos,willRetain,willMessage,1);
 }
-
 boolean XSPSClient::connect(const char *id, const char *user, const char *pass, const char* willTopic, uint8_t willQos, boolean willRetain, const char* willMessage, boolean cleanSession) {
     if (!connected()) {
         int result = 0;
@@ -539,19 +531,15 @@ boolean XSPSClient::loop() {
     }
     return false;
 }
-
 boolean XSPSClient::publish(const char* topic, const char* payload) {
     return publish(topic,(const uint8_t*)payload, payload ? strnlen(payload, this->bufferSize) : 0,false);
 }
-
 boolean XSPSClient::publish(const char* topic, const char* payload, boolean retained) {
     return publish(topic,(const uint8_t*)payload, payload ? strnlen(payload, this->bufferSize) : 0,retained);
 }
-
 boolean XSPSClient::publish(const char* topic, const uint8_t* payload, unsigned int plength) {
     return publish(topic, payload, plength, false);
 }
-
 boolean XSPSClient::publish(const char* topic, const uint8_t* payload, unsigned int plength, boolean retained) {
     if (connected()) {
         if (this->bufferSize < MQTT_MAX_HEADER_SIZE + 2+strnlen(topic, this->bufferSize) + plength) {
@@ -581,7 +569,6 @@ boolean XSPSClient::publish(const char* topic, const uint8_t* payload, unsigned 
 boolean XSPSClient::publish_P(const char* topic, const char* payload, boolean retained) {
     return publish_P(topic, (const uint8_t*)payload, payload ? strnlen(payload, this->bufferSize) : 0, retained);
 }
-
 boolean XSPSClient::publish_P(const char* topic, const uint8_t* payload, unsigned int plength, boolean retained) {
     uint8_t llen = 0;
     uint8_t digit;
@@ -655,7 +642,6 @@ size_t XSPSClient::write(uint8_t data) {
     lastOutActivity = millis();
     return _client->write(data);
 }
-
 size_t XSPSClient::write(const uint8_t *buffer, size_t size) {
     lastOutActivity = millis();
     return _client->write(buffer,size);
@@ -712,7 +698,6 @@ boolean XSPSClient::write(uint8_t header, uint8_t* buf, uint16_t length) {
 boolean XSPSClient::subscribe(const char* topic) {
     return subscribe(topic, 0);
 }
-
 boolean XSPSClient::subscribe(const char* topic, uint8_t qos) {
     size_t topicLength = strnlen(topic, this->bufferSize);
     if (topic == 0) {
@@ -787,7 +772,6 @@ uint16_t XSPSClient::writeString(const char* string, uint8_t* buf, uint16_t pos)
     return pos;
 }
 
-
 boolean XSPSClient::connected() {
     boolean rc;
     if (_client == NULL ) {
@@ -811,14 +795,12 @@ XSPSClient& XSPSClient::setServer(uint8_t * ip, uint16_t port) {
     IPAddress addr(ip[0],ip[1],ip[2],ip[3]);
     return setServer(addr,port);
 }
-
 XSPSClient& XSPSClient::setServer(IPAddress ip, uint16_t port) {
     this->ip = ip;
     this->port = port;
     this->domain = NULL;
     return *this;
 }
-
 XSPSClient& XSPSClient::setServer(const char * domain, uint16_t port) {
     this->domain = domain;
     this->port = port;
