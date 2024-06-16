@@ -143,7 +143,7 @@ void XSEthernet::UDP_Connect(const char* ip, uint16_t port){
 
 void XSEthernet::println(String data){
     // Enviar el mensaje por UDP
-    udp.beginPacket(xsip, port);
+    udp.beginPacket(xsip, xsport);
     udp.println(data);
     udp.endPacket();
 }
