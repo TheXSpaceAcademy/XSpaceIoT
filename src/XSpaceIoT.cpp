@@ -111,6 +111,44 @@ void XSThing::Mqtt_SerialInfo(bool mode){
 
 /*****************************************************************************************/
 
+void XSEthernet::Wifi_init(const char* ssid, const char* wifi_pass){
+	if(this->_xspace_info){
+		Serial.println();
+		Serial.print("Connecting to ssid: ");
+		Serial.println(ssid);
+	}
+
+	WiFi.begin(ssid, wifi_pass);
+
+	while (WiFi.status() != WL_CONNECTED) {
+		delay(250);
+		if(this->_xspace_info) Serial.print(".");
+	}
+
+	if(this->_xspace_info){
+		Serial.println("");
+		Serial.println("Connected!!");
+		Serial.println("IP address assigned: ");
+		Serial.println(WiFi.localIP());
+	}
+	WiFi.setSleep(false);
+}
+
+void XSEthernet::UDP_Connect(const char* ip, uint16_t port){
+  xsport = port;
+  xsip = ip;
+  udp.begin(xsport);
+}
+
+void XSEthernet::println(String data){
+    // Enviar el mensaje por UDP
+    udp.beginPacket(xsip, port);
+    udp.println(data);
+    udp.endPacket();
+}
+
+/*****************************************************************************************/
+
 XSPSClient::XSPSClient() {
     this->_state = MQTT_DISCONNECTED;
     this->_client = NULL;

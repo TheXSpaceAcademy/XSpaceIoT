@@ -144,6 +144,22 @@ class XSThing{
 		bool   _xspace_info = false;
 };
 
+class XSEthernet{
+  public:
+    void Wifi_init(const char* ssid, const char* wifi_pass);
+    void UDP_Connect(const char* ip, uint16_t port);
+    void println(String data);
+	private:
+		bool   _xspace_info = false;
+    uint16_t xsport;
+    const char* xsip;
+
+};
+
+
+
+
+
 class XSPSClient : public Print {
 	public:
 		XSPSClient();
