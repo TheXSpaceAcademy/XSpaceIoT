@@ -8,6 +8,7 @@
 
 WiFiClient XSPSClientWifiClient;
 XSPSClient XSPSClientMQTT(XSPSClientWifiClient);
+WiFiUDP udp;
 
 TickType_t CheckBufferTime;
 void MqttLoopCheckBuffer(void *pv){
