@@ -141,23 +141,50 @@ void XSEthernet::UDP_Connect(const char* ip, uint16_t port){
   udp.begin(xsport);
 }
 
-template <typename T>
-void XSEthernet::print(const T& data){
+// Sends an integer over UDP
+void XSEthernet::print(int data) {
     String dataStr = String(data);
-    // Enviar el mensaje por UDP
     udp.beginPacket(xsip, xsport);
     udp.print(dataStr);
     udp.endPacket();
 }
-
-template <typename T>
-void XSEthernet::println(const T& data){
+// Sends a double over UDP
+void XSEthernet::print(double data) {
     String dataStr = String(data);
-    // Enviar el mensaje por UDP
     udp.beginPacket(xsip, xsport);
-    udp.println(dataStr);
+    udp.print(dataStr);
     udp.endPacket();
 }
+// Sends a String over UDP
+void XSEthernet::print(String data) {
+    udp.beginPacket(xsip, xsport);
+    udp.print(data);
+    udp.endPacket();
+}
+
+
+// Sends an integer over UDP
+void XSEthernet::println(int data) {
+    String dataStr = String(data);
+    udp.beginPacket(xsip, xsport);
+    udp.print(dataStr);
+    udp.endPacket();
+}
+// Sends a double over UDP
+void XSEthernet::println(double data) {
+    String dataStr = String(data);
+    udp.beginPacket(xsip, xsport);
+    udp.print(dataStr);
+    udp.endPacket();
+}
+// Sends a String over UDP
+void XSEthernet::println(String data) {
+    udp.beginPacket(xsip, xsport);
+    udp.print(data);
+    udp.endPacket();
+}
+
+
 
 void XSEthernet::Mqtt_SerialInfo(bool mode){
 	this->_xspace_info = mode;

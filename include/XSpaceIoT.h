@@ -166,14 +166,16 @@ class XSEthernet {
 		/** Sends a string over the UDP connection.
 		 *  @param data String data to send over UDP.
 		 */
-		template <typename T> 
-		void print(const T&);
+		void print(int data);
+		void print(double data);
+		void print(String data);
 
 		/** Sends a string over the UDP connection, followed by a newline.
 		 *  @param data String data to send over UDP.
 		 */
-		template <typename T> 
-		void println(const T&);
+		void println(int data);
+		void println(double data);
+		void println(String data);
 
 	private:
 		bool _xspace_info = false;  // Flag for XSpace debugging information
