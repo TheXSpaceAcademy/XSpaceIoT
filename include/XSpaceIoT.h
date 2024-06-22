@@ -163,6 +163,12 @@ class XSEthernet {
 		 */
 		void UDP_Connect(const char* ip, uint16_t port);
 
+		/** Sends a string over the UDP connection.
+		 *  @param data String data to send over UDP.
+		 */
+		template <typename T> 
+		void print(const T&);
+
 		/** Sends a string over the UDP connection, followed by a newline.
 		 *  @param data String data to send over UDP.
 		 */

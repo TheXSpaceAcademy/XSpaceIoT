@@ -142,6 +142,15 @@ void XSEthernet::UDP_Connect(const char* ip, uint16_t port){
 }
 
 template <typename T>
+void XSEthernet::print(const T& data){
+    String dataStr = String(data);
+    // Enviar el mensaje por UDP
+    udp.beginPacket(xsip, xsport);
+    udp.print(dataStr);
+    udp.endPacket();
+}
+
+template <typename T>
 void XSEthernet::println(const T& data){
     String dataStr = String(data);
     // Enviar el mensaje por UDP
