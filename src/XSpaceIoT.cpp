@@ -167,20 +167,20 @@ void XSEthernet::print(String data) {
 void XSEthernet::println(int data) {
     String dataStr = String(data);
     udp.beginPacket(xsip, xsport);
-    udp.print(dataStr);
+    udp.println(dataStr);
     udp.endPacket();
 }
 // Sends a double over UDP
 void XSEthernet::println(double data) {
     String dataStr = String(data);
     udp.beginPacket(xsip, xsport);
-    udp.print(dataStr);
+    udp.println(dataStr);
     udp.endPacket();
 }
 // Sends a String over UDP
 void XSEthernet::println(String data) {
     udp.beginPacket(xsip, xsport);
-    udp.print(data);
+    udp.println(data);
     udp.endPacket();
 }
 
