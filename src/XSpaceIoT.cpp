@@ -141,12 +141,19 @@ void XSEthernet::UDP_Connect(const char* ip, uint16_t port){
   udp.begin(xsport);
 }
 
-void XSEthernet::println(String data){
+template <typename T>
+void XSEthernet::println(const T& data){
+    String dataStr = String(data);
     // Enviar el mensaje por UDP
     udp.beginPacket(xsip, xsport);
-    udp.println(data);
+    udp.println(dataStr);
     udp.endPacket();
 }
+
+void XSEthernet::Mqtt_SerialInfo(bool mode){
+	this->_xspace_info = mode;
+}
+
 
 /*****************************************************************************************/
 

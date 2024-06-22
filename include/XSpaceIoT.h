@@ -144,18 +144,36 @@ class XSThing{
 		bool   _xspace_info = false;
 };
 
-class XSEthernet{
-  public:
-    void Wifi_init(const char* ssid, const char* wifi_pass);
-    void UDP_Connect(const char* ip, uint16_t port);
-    void println(String data);
+class XSEthernet {
+	public:
+		/* Toggles serial debugging information
+			@param mode Enable or disable debugging information
+		*/
+		void Mqtt_SerialInfo(bool mode);
+
+		/** Initializes WiFi connection.
+		 *  @param ssid WiFi SSID.
+		 *  @param wifi_pass WiFi password.
+		 */
+		void Wifi_init(const char* ssid, const char* wifi_pass);
+
+		/** Establishes UDP connection.
+		 *  @param ip IP address of the remote UDP server.
+		 *  @param port Port number of the remote UDP server.
+		 */
+		void UDP_Connect(const char* ip, uint16_t port);
+
+		/** Sends a string over the UDP connection, followed by a newline.
+		 *  @param data String data to send over UDP.
+		 */
+		template <typename T> 
+		void println(const T&);
+
 	private:
-		bool   _xspace_info = false;
-    uint16_t xsport;
-    const char* xsip;
-
+		bool _xspace_info = false;  // Flag for XSpace debugging information
+		uint16_t xsport;            // Port number for UDP connection
+		const char* xsip;           // IP address for UDP connection
 };
-
 
 
 
